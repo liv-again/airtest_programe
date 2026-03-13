@@ -26,4 +26,9 @@ def check_listitem_redirect(n):
     poco(resourceId="com.hexin.plat.android.ZhongyuanSecurity:id/backButton").click()
     return stock_name == listitem_name
     
-    
+price_old=poco(
+       text="上证指数"
+   ).parent().parent().offspring(
+       resourceId="com.hexin.plat.android.ZhongyuanSecurity:id/tv_stock_price"
+   ).get_text()
+print(price_old)

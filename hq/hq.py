@@ -29,34 +29,35 @@ touch(Template(r"tpl1772729307704.png", record_pos=(-0.379, -0.781), resolution=
 assert_exists(Template(r"tpl1772900692358.png", record_pos=(0.011, -0.706), resolution=(1080, 2376)), "存在国内指数模块")
 try:
    price_old=poco(
-       resourceId="com.hexin.plat.android.ZhongyuanSecurity:id/view_info_block"
-   ).offspring(
+       text="上证指数"
+   ).parent().parent().offspring(
        resourceId="com.hexin.plat.android.ZhongyuanSecurity:id/tv_stock_price"
    ).get_text()
 except:
     print("poco 断开")
     time.sleep(2)
     price_old=poco(
-       resourceId="com.hexin.plat.android.ZhongyuanSecurity:id/view_info_block"
-   ).offspring(
+       text="上证指数"
+   ).parent().parent().offspring(
        resourceId="com.hexin.plat.android.ZhongyuanSecurity:id/tv_stock_price"
    ).get_text()
 time.sleep(5)
 try:
    price_new=poco(
-       resourceId="com.hexin.plat.android.ZhongyuanSecurity:id/view_info_block"
-   ).offspring(
+       text="上证指数"
+   ).parent().parent().offspring(
        resourceId="com.hexin.plat.android.ZhongyuanSecurity:id/tv_stock_price"
    ).get_text()
 except:
     print("poco 断开")
     time.sleep(2)
     price_new=poco(
-       resourceId="com.hexin.plat.android.ZhongyuanSecurity:id/view_info_block"
-   ).offspring(
+       text="上证指数"
+   ).parent().parent().offspring(
        resourceId="com.hexin.plat.android.ZhongyuanSecurity:id/tv_stock_price"
    ).get_text()
-assert price_old != price_new ,"行情未刷新"
+assert price_old != price_new ,"行情未刷新" 
+
 touch(Template(r"tpl1772901330290.png", record_pos=(-0.322, -0.581), resolution=(1080, 2376)))
 touch(Template(r"tpl1772901356115.png", record_pos=(-0.408, -0.928), resolution=(1080, 2376)))
 
