@@ -5,7 +5,7 @@ from airtest.core.api import *
 from airtest.cli.parser import cli_setup
 import time
 from poco.drivers.android.uiautomation import AndroidUiautomationPoco
-
+block=poco(resourceId="com.hexin.plat.android.ZhongyuanSecurity:id/dragablelistviewitem")[0]
 
 # 函数写得还有问题，感觉需要加一下参数，
 #列表数据刷新
@@ -26,9 +26,29 @@ def check_listitem_redirect(n):
     poco(resourceId="com.hexin.plat.android.ZhongyuanSecurity:id/backButton").click()
     return stock_name == listitem_name
     
-price_old=poco(
-       text="上证指数"
-   ).parent().parent().offspring(
-       resourceId="com.hexin.plat.android.ZhongyuanSecurity:id/tv_stock_price"
-   ).get_text()
-print(price_old)
+###根据文案在当前页面往上寻找对应元素是否存在
+def upsearch_by_text(content):
+    temp=0
+    while not poco(text=content).exists() and temp<10:
+        print(f"当前页面无{content}，尝试上划寻找")
+        swipe((500,800),(500,2000))
+        sleep(1)
+        temp +=1
+    if poco(text=content).exists():
+        return True,poco(text=content)
+    else:
+        return False
+###根据文案在当前页面往下寻找对应元素是否存在   
+def downsearch_by_text(content):
+    temp=0
+    while not poco(text=content).exists() and temp<10:
+        print(f"当前页面无{content}，尝试下划寻找")
+        swipe((500,2000),(500,800))
+        sleep(1)
+        temp +=1
+    if poco(text=content).exists():
+        return True,poco(text=content)
+    else:
+        return False
+    
+
