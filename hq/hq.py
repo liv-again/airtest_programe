@@ -17,7 +17,11 @@ poco = AndroidUiautomationPoco()
 if exists(Template(r"tpl1773071084423.png", record_pos=(-0.002, 0.081), resolution=(1080, 2376))) :
     touch(Template(r"tpl1773071097091.png", record_pos=(-0.004, 0.434), resolution=(1080, 2376)))
 
-
+if poco(text="新股/新债申购提醒").exists() :
+    poco(text="一键打新").click()
+    keyevent("BACK")
+if poco(text="委托登陆").exists():
+        keyevent("BACK")
 
 ### 切换行情 ###
 touch(Template(r"tpl1772729181893.png", record_pos=(-0.195, 0.979), resolution=(1080, 2376)))
