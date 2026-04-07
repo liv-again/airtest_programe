@@ -32,6 +32,10 @@ if poco(text="系统信息").exists():
     raise exception("登录失败，请确认原因")
 if poco(text="清算提醒通知").exists():
     poco(text="确认").click()
+    
+### 清算提醒
+if poco(text="清算提醒通知").exists() :
+    poco(text="确认").click()
 #  基础菜单遍历
 poco(resourceId="com.hexin.plat.android.ZhongyuanSecurity:id/menu_buy").click() #买
 time.sleep(2)
@@ -52,12 +56,15 @@ search_menu=poco(resourceId="com.hexin.plat.android.ZhongyuanSecurity:id/menu_na
 for search_item in search_menu:
     search_item.click()
     time.sleep(2)
-    poco(desc="返回").click()
+    if poco(desc="返回").exists():
+        poco(desc="返回").click()
+    else:
+        poco(name="android.widget.ImageView")[0].click()
 poco(desc="返回").click()
 
 poco(resourceId="com.hexin.plat.android.ZhongyuanSecurity:id/menu_holdings").click() #持仓
 time.sleep(2)
-poco(desc="返回").click()
+poco(name="android.widget.ImageView")[0].click()
 
 #银证转账
 poco(resourceId="com.hexin.plat.android.ZhongyuanSecurity:id/ll_transfer_accounts").click() 
@@ -69,20 +76,22 @@ if poco(text="没有转账记录。").exists():
     poco(text="确定").click()
 poco(resourceId="com.hexin.plat.android.ZhongyuanSecurity:id/tv_history_transfer_record").click()
 time.sleep(2)
-poco(desc="返回").click()
+poco(name="android.widget.ImageView").click() #返回
 if poco(text="没有转账记录。").exists():
     poco(text="确定").click()
-poco(desc="返回").click()
+poco(name="android.widget.ImageView").click() #返回
 
-poco(resourceId="com.hexin.plat.android.ZhongyuanSecurity:id/ll_trade_today").click() #当日成交
+###当日成交
+poco(resourceId="com.hexin.plat.android.ZhongyuanSecurity:id/ll_trade_today").click() 
 time.sleep(2)
 poco(desc="返回").click()
 
-poco(resourceId="com.hexin.plat.android.ZhongyuanSecurity:id/ll_wt_today").click() #当日委托
+###当日委托
+poco(resourceId="com.hexin.plat.android.ZhongyuanSecurity:id/ll_wt_today").click() 
 time.sleep(2)
 poco(desc="返回").click()
-
-poco(resourceId="com.hexin.plat.android.ZhongyuanSecurity:id/v_new_stock_purchase").click() #新股
+###新股
+poco(resourceId="com.hexin.plat.android.ZhongyuanSecurity:id/v_new_stock_purchase").click() 
 time.sleep(1)
 if poco(text="申购风险提示").exists():
     poco(text="我已知晓").click()
@@ -98,6 +107,7 @@ menu=poco(resourceId="com.hexin.plat.android.ZhongyuanSecurity:id/tv_menu_text")
 for item in menu:
     item.click()
     poco(name="android.widget.ImageView")[0].click()
+poco(name="android.widget.ImageView")[0].click() #返回按钮
 poco(name="android.widget.ImageView")[0].click() #返回按钮
 
 ###基金交易
@@ -195,5 +205,199 @@ for title in tv_titles:
     poco(desc="返回").click()
 poco(desc="返回").click()
 
-    
-    
+### 债券交易
+poco(text="债券交易").click()
+##匹配成交
+poco(resourceId="com.hexin.plat.android.ZhongyuanSecurity:id/ll_buy").click()
+time.sleep(1)
+poco(text="匹配成交").parent().parent().offspring(name="android.widget.ImageView")[0].click()
+time.sleep(1)
+poco(resourceId="com.hexin.plat.android.ZhongyuanSecurity:id/ll_sale").click()
+time.sleep(1)
+poco(text="匹配成交").parent().parent().offspring(name="android.widget.ImageView")[0].click()
+time.sleep(1)
+poco(resourceId="com.hexin.plat.android.ZhongyuanSecurity:id/ll_cancel").click()
+time.sleep(1)
+poco(text="匹配成交").parent().parent().offspring(name="android.widget.ImageView")[0].click()
+time.sleep(1)
+poco(resourceId="com.hexin.plat.android.ZhongyuanSecurity:id/ll_position").click()
+time.sleep(1)
+poco(text="匹配成交").parent().parent().offspring(name="android.widget.ImageView")[0].click()
+time.sleep(1)
+poco(resourceId="com.hexin.plat.android.ZhongyuanSecurity:id/ll_query").click()
+menu_list=poco(resourceId="com.hexin.plat.android.ZhongyuanSecurity:id/tv_menu_text")
+for tv_menu_text in menu_list:
+    tv_menu_text.click()
+    poco(resourceId="com.hexin.plat.android.ZhongyuanSecurity:id/hx_page_root").child(name="android.widget.RelativeLayout").offspring(name="android.widget.ImageView")[0].click()
+poco(text="匹配成交").parent().parent().offspring(name="android.widget.ImageView")[0].click()
+##点击成交
+poco(text="点击成交").click()
+poco(text="回复").click()
+poco(text="行情").click()
+poco(text="撤单").click()
+poco(text="查询").click()
+poco(text="委托查询").click()
+poco(text="回复").click()
+poco(text="报价").click()
+poco(text="委托查询").parent().parent().offspring(name="android.widget.ImageView")[0].click()
+poco(text="成交查询").click()
+poco(text="成交查询").parent().parent().offspring(name="android.widget.ImageView")[0].click()
+poco(text="点击成交").parent().parent().offspring(name="android.widget.ImageView")[0].click()
+
+##询价查询
+poco(text="询价成交").click()
+poco(text="报价申报").click()
+poco(text="报价回复").click()
+poco(textMatches=".*撤单.*").click() 
+poco(text="报价").click()
+poco(text="询价").click()
+poco(text=" 查询 ").click() #撤单和查询一样，前一个空格后一个空格凑成4字符
+
+poco(text="委托查询").click()
+poco(text="报价申报").click()
+poco(text="报价回复").click()
+poco(text="询价申报").click()
+poco(text="委托查询").parent().parent().offspring(name="android.widget.ImageView")[0].click()
+
+poco(text="成交查询").click()
+poco(text="成交查询").parent().parent().offspring(name="android.widget.ImageView")[0].click()
+poco(text="询价成交").parent().parent().offspring(name="android.widget.ImageView")[0].click()
+
+##协商成交
+poco(text="成交申报").click()
+poco(text="成交回复").click()
+poco(textMatches=".*撤单.*").click() 
+poco(text=" 查询 ").click() #撤单和查询一样，前一个空格后一个空格凑成4字符
+poco(text="委托查询").click()
+poco(text="委托查询").parent().parent().offspring(name="android.widget.ImageView")[0].click()
+poco(text="成交查询").click()
+poco(text="成交查询").parent().parent().offspring(name="android.widget.ImageView")[0].click()
+poco(text="协商成交").parent().parent().offspring(name="android.widget.ImageView")[0].click()
+
+##竞买成交
+poco(text="竞买成交").click()
+poco(text="发起申报").click()
+poco(text="应价申报").click()
+poco(textMatches=".*撤单.*").click() 
+poco(text="发起申报").click()
+poco(text="应价申报").click()
+poco(text="预约申报").click()
+poco(text=" 查询 ").click() #撤单和查询一样，前一个空格后一个空格凑成4字符
+poco(text="竞买预约信息查询").click()
+poco(text="竞买预约信息查询").parent().parent().offspring(name="android.widget.ImageView")[0].click()
+poco(text="竞买应价信息查询").click()
+poco(text="竞买应价信息查询").parent().parent().offspring(name="android.widget.ImageView")[0].click()
+poco(text="委托查询").click()
+poco(text="发起申报").click()
+poco(text="应价申报").click()
+poco(text="预约申报").click()
+poco(text="委托查询").parent().parent().offspring(name="android.widget.ImageView")[0].click()
+poco(text="成交查询").click()
+poco(text="成交查询").parent().parent().offspring(name="android.widget.ImageView")[0].click()
+poco(text="竞买成交").parent().parent().offspring(name="android.widget.ImageView")[0].click()
+
+##交易员信息维护
+poco(text="交易员信息维护").click()
+poco(text="交易员信息维护").parent().parent().offspring(name="android.widget.ImageView")[0].click()
+
+poco(text="债券交易").parent().parent().offspring(name="android.widget.ImageView")[0].click()
+
+###北交所可转债
+poco(text="北交所可转债").click()
+
+###条件单
+poco(text="条件单").click()
+poco(text="条件单").parent().parent().child().child(name="android.widget.ImageView").click()
+
+###基金交易
+poco(text="基金交易").click()
+poco(desc="返回").click()
+
+###行情测试
+poco(text="行情测试").click()
+poco(text="交易").click()
+
+###先行赔付
+poco(text="先行赔付").click()
+poco(text="申报结果查询").click()
+poco(text="先行赔付结果查询").parent().parent().offspring(name="android.widget.ImageView").click()
+poco(text="先行赔付").parent().parent().offspring(name="android.widget.ImageView").click()
+
+###网络投票
+poco(text="网络投票").click()
+poco(text="股东大会").click()
+poco(text="投票查询").click()
+poco(text="深圳投票查询").click()
+poco(text="上海投票查询").click()
+poco(text="投票查询").parent().parent().offspring(name="android.widget.ImageView").click()
+poco(text="股东大会").parent().parent().offspring(name="android.widget.ImageView").click()
+poco(text="先行赔付受偿申报").click()
+poco(text="申报结果查询").click()
+poco(text="先行赔付结果查询").parent().parent().offspring(name="android.widget.ImageView").click()
+poco(text="先行赔付").parent().parent().offspring(name="android.widget.ImageView").click()
+poco(text="网络投票").parent().parent().offspring(name="android.widget.ImageView").click()
+
+#滑动
+swipe((600,2000),(600,600))
+
+###OTC&天天汇利
+poco(text="OTC").click()
+poco(text="交易").click()
+poco(text="天天汇利").click()
+poco(text="交易").click()
+
+###可转债转股
+poco(text="可转债转股").click()
+poco(desc="返回").click()
+
+###要约收购
+poco(text="要约收购").click()
+poco(name="预受要约").click()
+poco(name="预受要约").parent().offspring(name="android.view.View").click()
+poco(name="解除要约").click()
+poco(name="解除要约").parent().offspring(name="android.view.View").click()
+poco(name="要约收购").parent().offspring(name="android.view.View").click()
+
+###盘后固定价格交易
+poco(text="盘后固定价格交易").click()
+poco(text="卖出").click()
+poco(text="撤单").click()
+poco(text="买入").click()
+poco(text="查询").click()
+poco(text="盘后固定价格当日委托查询").click()
+poco(text="盘后固定价格当日委托查询").parent().parent().offspring(name="android.widget.ImageView")[0].click()
+poco(text="盘后固定价格当日成交查询").click()
+poco(text="盘后固定价格当日成交查询").parent().parent().offspring(name="android.widget.ImageView")[0].click()
+poco(text="盘后固定价格历史委托查询").click()
+poco(text="盘后固定价格历史委托查询").parent().parent().offspring(name="android.widget.ImageView")[0].click()
+poco(text="盘后固定价格历史成交查询").click()
+poco(text="盘后固定价格历史成交查询").parent().parent().offspring(name="android.widget.ImageView")[0].click()
+poco(text="盘后定价交易").parent().parent().offspring(name="android.widget.ImageView")[0].click()
+
+###修改密码
+poco(text="修改密码").click()
+poco(text="修改交易密码").click()
+poco(text="修改交易密码").parent().parent().offspring(name="android.widget.ImageView")[0].click()
+poco(text="修改资金密码").click()
+poco(text="修改资金密码").parent().parent().offspring(name="android.widget.ImageView")[0].click()
+poco(desc="返回").click()
+
+###模拟大赛
+poco(text="模拟大赛").click()
+poco(text="模拟炒股").parent().children()[1].click()
+
+swipe((600,2000),(600,600))
+
+###活期产品&定期产品
+poco(text="活期产品").click()
+poco(text="交易").click()
+poco(text="定期产品").click()
+poco(text="交易").click()
+poco(text="基金专区").click()
+poco(text="交易").click()
+poco(text="高端理财").click()
+poco(text="交易").click()
+
+###退出登陆
+poco(text="退出登录").click()
+poco(text="确认").click()
