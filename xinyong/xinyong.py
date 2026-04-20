@@ -73,13 +73,79 @@ poco(text="转入").click()
 poco(text="查询").click()
 poco(desc="返回").click()
 
-###查询
-poco(text="查询")
-menu=poco(resourceId="com.hexin.plat.android.ZhongyuanSecurity:id/menu_name")
-for menu_name in menu:
-    menu_name.click()
-    poco(desc="返回").click()
+###一键打新
+poco(text="一键打新").click()
+if poco(text="申购风险提示").exists():
+    poco(text="我已知晓").click()
+    
+poco(text="待缴款").click()
+poco(text="中签待缴款查询").parent().parent().offspring(name="android.widget.ImageView")[0].click()
+
+poco(text="申购查询").click()
+poco(text="新股新债申购配号查询").click()
+poco(text="新股新债中签查询").click()
+poco(text="新股新债申购委托查询").click()
+poco(text="申购查询").parent().parent().offspring(name="android.widget.ImageView")[0].click()
+
+poco(text="新股日历").click()
+poco(text="打新日历").parent().parent().offspring(name="android.widget.ImageView")[0].click()
+
+poco(text="北证A股").click()
+poco(text="新股一键申购").click()
+poco(text="公开发行申购").parent().parent().offspring(name="android.widget.ImageView")[0].click()
+poco(text="询价委托查询").click()
+poco(text="询价委托查询").parent().parent().offspring(name="android.widget.ImageView")[0].click()
+poco(text="申购委托查询").click()
+poco(text="申购委托查询").parent().parent().offspring(name="android.widget.ImageView")[0].click()
+poco(text="询价结果查询").click()
+poco(text="询价结果查询").parent().parent().offspring(name="android.widget.ImageView")[0].click()
+poco(text="申购结果查询").click()
+poco(text="申购结果查询").parent().parent().offspring(name="android.widget.ImageView")[0].click()
+poco(text="北交所新股申购").parent().parent().offspring(name="android.widget.ImageView")[0].click()
+poco(name="android.widget.ImageView")[0].click()
+
+
+###四种还款还券
+poco(text="直接还款").click()
 poco(desc="返回").click()
+poco(text="直接还券").click()
+poco(desc="返回").click()
+poco(text="卖券还款").click()
+poco(desc="返回").click()
+poco(text="买券还券").click()
+poco(desc="返回").click()
+
+###盘后交易
+poco(text="创业板盘后固定价格交易").click()
+poco(text="卖出").click()
+poco(text="撤单").click()
+poco(text="查询").click()
+menu=poco(resourceId="com.hexin.plat.android.ZhongyuanSecurity:id/tv_menu_text")
+for item in menu :
+    item.click()
+    poco(name="android.widget.ImageView")[0].click()
+poco(name="android.widget.ImageView")[0].click()
+
+swipe([700,2000],[700,500])
+
+###合约展期
+poco(text="合约展期").click()
+poco(text="合约展期申请查询").click()
+poco(desc="返回").click()
+poco(text="合约展期批量申请").click()
+poco(desc="返回").click()
+poco(desc="返回").click()
+
+###修改密码
+poco(text="修改密码").click()
+poco(text="修改交易密码").click()
+poco(desc="返回").click()
+poco(text="修改资金密码").click()
+poco(desc="返回").click()
+poco(desc="返回").click()
+
+poco(text="条件单").click()
+poco(name="android.widget.ImageView")[1].click()
 # generate html report
 # from airtest.report.report import simple_report
 # simple_report(__file__, logpath=True)
